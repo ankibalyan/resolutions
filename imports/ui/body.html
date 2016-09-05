@@ -1,25 +1,24 @@
 <body>
 	<div class="container">
 		<header>
-		<h1>Monthly resolutions</h1>
-		<form action="" class="new-resolution">
-			<input type="text" name="title" placeholder="A new resolution">
-			<input type="submit" name="submit" value="Submit">
-		</form>
-	</header>
+			<h1>Monthly resolutions {{ incompleteCount }}</h1>
+			<label class="hide-finished">
+				<input type="checkbox" checked="{{hideFinished}}">
+				Hide Finished Resolution
+			</label>
+			{{> loginButtons }}
+
+			{{#if currentUser }}
+				<form action="" class="new-resolution">
+					<input type="text" name="title" placeholder="A new resolution">
+					<input type="submit" name="submit" value="Submit">
+				</form>
+			{{/if}}
+		</header>
+		<ul>
+		  {{#each resolutions}}  
+		    {{> resolution}}
+		  {{/each}}
+		</ul>
 	</div>
-	<ul>
-	  {{#each resolutions}}  
-	    {{> resolution}}
-	  {{/each}}
-	</ul>
-
 </body>
-
-<template name="resolution">
-    <li class="{{#if checked }} checked {{/if}}">
-    	<input type="checkbox" checked="{{checked}}" class="toggle-checked">
-    	<span class="text">{{title}}</span>
-    	<button class="delete">Remove</button>
-    </li>
-</template>
